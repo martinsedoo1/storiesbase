@@ -10,7 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_26_212900) do
+ActiveRecord::Schema.define(version: 2019_03_28_144553) do
+
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "small_stories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.float "longitude"
+    t.float "latitude"
+    t.bigint "story_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "images"
+    t.string "videos"
+    t.index ["story_id"], name: "index_small_stories_on_story_id"
+  end
+
+  create_table "stories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "image"
+    t.bigint "user_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_stories_on_category_id"
+    t.index ["user_id"], name: "index_stories_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
@@ -20,4 +52,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_212900) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "small_stories", "stories"
+  add_foreign_key "stories", "categories"
+  add_foreign_key "stories", "users"
 end
