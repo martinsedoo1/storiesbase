@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
+
     render json: @users
   end
 
@@ -12,8 +13,6 @@ class UsersController < ApplicationController
   def show
     render json: UserBlueprint.render(@user)
   end
-
-
 
 
   # POST /users

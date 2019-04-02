@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_28_144553) do
+ActiveRecord::Schema.define(version: 2019_04_01_192556) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "small_stories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -52,6 +63,7 @@ ActiveRecord::Schema.define(version: 2019_03_28_144553) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "users"
   add_foreign_key "small_stories", "stories"
   add_foreign_key "stories", "categories"
   add_foreign_key "stories", "users"

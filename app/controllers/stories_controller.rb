@@ -4,7 +4,6 @@ class StoriesController < ApplicationController
   # GET /stories
   def index
     @stories = Story.all
-
     render json: @stories
   end
 
@@ -16,7 +15,6 @@ class StoriesController < ApplicationController
   # POST /stories
   def create
     @story = Story.new(story_params)
-
     if @story.save
       render json: @story, status: :created, location: @story
     else
