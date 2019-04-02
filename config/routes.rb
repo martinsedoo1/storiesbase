@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   end
 
 
+  post 'passwords/forgot', to: 'passwords#forgot'
+  post 'passwords/reset', to: 'passwords#reset'
+
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
