@@ -1,7 +1,9 @@
 class User < ApplicationRecord
     has_secure_password
     validates_presence_of :name , :email , :password_digest
-    validates  :email , uniqueness: true
+    validates :email , uniqueness: true
+    validates :email, length: { in: 4..100 }
+    validates :email, presence: true
     has_many :stories
     has_many :comments
 

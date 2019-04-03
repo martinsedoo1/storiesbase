@@ -13,7 +13,7 @@ class PasswordsController < ApplicationController
         end
     end
 
-      def reset
+    def reset
         token = params[:token].to_s
         user = User.find_by(reset_password_token: token)
         if user.present? && user.password_token_valid?
@@ -25,7 +25,7 @@ class PasswordsController < ApplicationController
         else
           render json: {error:  "Link not valid or expired. Try generating a new link."}, status: :not_found
         end
-      end
+    end
 
 
     private
@@ -33,6 +33,7 @@ class PasswordsController < ApplicationController
     def set_forgot_password_params
         @user = User.find_by(email: permit_forgot_password_params[:email])
     end
+
     private
     # Only allow a trusted parameter "white list" through.
     def permit_forgot_password_params
