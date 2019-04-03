@@ -12,8 +12,15 @@ gem 'puma', '~> 3.11'
 
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 
+gem 'rack-cors'
 
 gem 'blueprinter'
+
+gem 'jwt'
+
+gem 'simple_command'
+
+
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
