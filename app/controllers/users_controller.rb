@@ -4,9 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-
-
-    render json: @users
+    render json: UserBlueprint.render(@users)
   end
 
   # GET /users/1
@@ -15,21 +13,11 @@ class UsersController < ApplicationController
   end
 
 
-  # POST /users
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      UserMailer.welcome_email(@user).deliver_later!
-      render json: @user, status: :created, location: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
-  end
 
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      render json: @user
+      render json: UserBlueprint.render(@user)
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -46,10 +34,6 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def user_params
-      params.permit(:name, :email, :password)
-    end
 
 
 

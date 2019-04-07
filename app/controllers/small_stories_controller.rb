@@ -3,8 +3,8 @@ class SmallStoriesController < ApplicationController
 
   # GET /small_stories
   def index
-    @small_stories = SmallStory.all
-
+    @story = current_user.stories.find(params[:story_id])
+    @small_stories = @story.small_stories
     render json: @small_stories
   end
 

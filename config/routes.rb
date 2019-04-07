@@ -4,11 +4,10 @@ Rails.application.routes.draw do
 
   resources :categories
 
-  resources :small_stories do
-    resources :comments, module: :small_stories
-  end
+
 
   resources :stories do
+    resources :small_stories
     resources :comments, module: :stories
   end
 
@@ -16,6 +15,8 @@ Rails.application.routes.draw do
   post 'passwords/forgot', to: 'passwords#forgot'
   post 'passwords/reset', to: 'passwords#reset'
   post 'auth/login' , to: 'authentications#login'
+  post 'auth/register' , to: 'authentications#register'
+
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
