@@ -15,7 +15,6 @@ class JsonWebToken
           #decodes the token to get user data (payload)
           body = JWT.decode(token, Rails.application.secrets.secret_key_base)[0]
           HashWithIndifferentAccess.new body
-
         # raise custom error to be handled by custom handler
         rescue JWT::ExpiredSignature, JWT::VerificationError => e
           raise ExceptionHandler::ExpiredSignature, e.message

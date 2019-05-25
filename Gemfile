@@ -20,7 +20,7 @@ gem 'jwt'
 
 gem 'simple_command'
 
-
+gem 'rack', '~> 2.0', '>= 2.0.7'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'

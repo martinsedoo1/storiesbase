@@ -1,9 +1,9 @@
 # app/controllers/authentication_controller.rb
 class ApplicationController < ActionController::API
-    before_action :authenticate_request
-    skip_before_action :authenticate_request, only: %i[login register forgot reset]
+    before_action :authenticate_request, except: [:login, :register, :forgot, :reset]
     attr_reader :current_user
     include ExceptionHandler
+
 
     private
     def authenticate_request
